@@ -1,2 +1,2 @@
 # DjangoToDoList
-Simple To-Do List written on Django
+Simple To-Do List web app written on Django
