@@ -1,5 +1,23 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from .models import ToDo
 
 
 def index(request):
-    return render(request, 'index.html')
+    todo = ToDo.objects.all()
+
+    if request.method == 'POST':
+        new_todo = ToDo(
+            title=request.POST['title']
+        )
+        new_todo.save()
+
+        return redirect('/')
+
+    return render(request, 'index.html', {'todos': todo})
+
+
+def delete(request, pk):
+    todo = ToDo.objects.get(id=pk)
+    todo.delete()
+
+    return redirect('/')
